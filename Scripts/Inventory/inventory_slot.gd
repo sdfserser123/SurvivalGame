@@ -1,11 +1,20 @@
 extends Panel
 
+
 var ItemClass = preload("res://Scenes/UI/Items/item.tscn")
 var item = null
 var slot_index
+var selected_texture
+var slot_type
+
+enum SlotType {
+	HOTBAR = 0,
+	INVENTORY,
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass 
+	selected_texture = null
 	
 func pickFromSlot():
 	remove_child(item)
@@ -36,6 +45,10 @@ func initialize_item(idName, item_amount):
 		item.set_item(idName, item_amount)
 	else:
 		item.set_item(idName, item_amount)
+
+func refresh_style():
+	if SlotType.HOTBAR == slot_type and PlayerInventory.active_item_slot == slot_index:
+		pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

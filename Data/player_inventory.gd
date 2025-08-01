@@ -1,14 +1,22 @@
 extends Node
 
+signal active_item_updated(slot_index)
+
 const slotClass = preload("res://Scripts/Inventory/inventory_slot.gd")
 const ItemClass = preload("res://Scripts/Items/item.gd")
 
 const NUM_INVENTORY_SLOTS = 30
+const NUM_HOTBAR_SLOTS = 10
 
 var inventory = {
 	0: ["wooden_axe", 1],
 	15: ["wood_log", 15]
 }
+
+var hotbar = {
+}
+
+var active_item_slot = 0
 
 func add_item(idName, item_amount):
 	for item in inventory:
@@ -34,3 +42,19 @@ func add_item_to_empty_slot(item: ItemClass, slot: slotClass):
 	
 func add_item_quantity(slot: slotClass, quantity_to_add: int):
 	inventory[slot.slot_index][1] += quantity_to_add
+
+func active_item_scroll_up():
+	active_item_slot = (active_item_slot + 1) % NUM_HOTBAR_SLOTS
+	emit_signal("active_item_updated", active_item_slot) # ✅ FIXED
+
+func active_item_scroll_down():
+	if active_item_slot == 0:
+		active_item_slot = NUM_HOTBAR_SLOTS - 1
+	else:
+		active_item_slot -= 1
+	emit_signal("active_item_updated", active_item_slot) # ✅ FIXED
+
+func set_active_slot(index: int):
+	if index != active_item_slot:
+		active_item_slot = index
+		emit_signal("active_item_updated", active_item_slot)

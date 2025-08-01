@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv4po6otrmekq"]
+
+[ext_resource type="Texture2D" uid="uid://bq3gb0af74en2" path="res://Texture/UI/MediavelFree.png" id="1_0xnpx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54tt2"]
+atlas = ExtResource("1_0xnpx")
+region = Rect2(80, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msd1d"]
+atlas = ExtResource("1_0xnpx")
+region = Rect2(112, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mccp7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54tt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msd1d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_mccp7")
+autoplay = "default"
+frame_progress = 0.397308

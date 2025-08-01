@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://4qhqjhp8aonn"]
+[gd_scene load_steps=16 format=4 uid="uid://4qhqjhp8aonn"]
 
 [ext_resource type="PackedScene" uid="uid://cwwse3hy7he11" path="res://Scenes/Player/player.tscn" id="1_6lguo"]
 [ext_resource type="Script" uid="uid://c4x46npm6iean" path="res://Scripts/Logic/game.gd" id="1_gbd1u"]
@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://eooe14h06u7q" path="res://Scenes/UI/Inventory/inventory.tscn" id="5_5myng"]
 [ext_resource type="Texture2D" uid="uid://dm5723jx82yhc" path="res://Assets/daynightcycle-gradient-texture.tres" id="5_61rjf"]
 [ext_resource type="PackedScene" uid="uid://7jw2kt68r58v" path="res://Scenes/Objects/camp_fire.tscn" id="5_by6ae"]
+[ext_resource type="Script" uid="uid://c2q0mkjfim6gi" path="res://Scripts/UI Interaction/canvas_layer.gd" id="10_tjxv7"]
 [ext_resource type="PackedScene" uid="uid://dskax4eb4kaom" path="res://Scenes/Objects/tree.tscn" id="10_w3ev1"]
+[ext_resource type="PackedScene" uid="uid://csog04n6virta" path="res://Scenes/UI/Hotbar/hotbar.tscn" id="11_xdj4n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_61rjf"]
 texture = ExtResource("1_togye")
@@ -278,11 +280,11 @@ texture = ExtResource("2_734yo")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 1.6, 1.6, 1.6, 1.6, 8)
 2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 1.6, -8, -8, 8, -8, 8, 1.6)
 3:0/0 = 0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.6, 1.6, -8, 1.6, -8, -8, 8, -8, 8, 8, -1.6, 8)
 4:0/0 = 0
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:0/0 = 0
@@ -324,14 +326,14 @@ texture = ExtResource("2_734yo")
 23:0/0 = 0
 23:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 1.6, 1.6, 1.6, 1.6, 8)
 1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 1.6, -8, -8, 1.6, -8, 1.6, 1.6)
 2:1/0 = 0
 3:1/0 = 0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.6, 1.6, -1.6, -8, 8, -8, 8, 1.6)
 4:1/0 = 0
-4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.6, 8, -1.6, 1.6, -8, 1.6, -8, -8, 8, -8, 8, 8)
 5:1/0 = 0
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:1/0 = 0
@@ -368,12 +370,12 @@ texture = ExtResource("2_734yo")
 23:1/0 = 0
 23:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:2/0 = 0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 1.6, -8, 1.6, 8)
 1:2/0 = 0
 2:2/0 = 0
 3:2/0 = 0
 4:2/0 = 0
-4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.6, 8, -1.6, -1.6, -1.6, -8, 8, -8, 8, 8)
 5:2/0 = 0
 5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:2/0 = 0
@@ -404,14 +406,14 @@ texture = ExtResource("2_734yo")
 23:2/0 = 0
 23:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:3/0 = 0
-0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 1.6, -8, 1.6, -1.6, 8, -1.6, 8, 8)
 1:3/0 = 0
-1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.6, -1.6, 1.6, 8, -8, 8, -8, -1.6)
 2:3/0 = 0
 3:3/0 = 0
-3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.6, 8, -1.6, -1.6, 8, -1.6, 8, 8)
 4:3/0 = 0
-4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -1.6, -1.6, -1.6, -1.6, -8, 8, -8, 8, 8)
 5:3/0 = 0
 5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:3/0 = 0
@@ -450,11 +452,11 @@ texture = ExtResource("2_734yo")
 0:4/0 = 0
 0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:4/0 = 0
-1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.6, -8, 1.6, -1.6, 8, -1.6, 8, 8, -8, 8, -8, -8)
 2:4/0 = 0
-2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1.6, 8, -1.6, 8, 8, -8, 8)
 3:4/0 = 0
-3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1.6, -1.6, -1.6, -1.6, -8, 8, -8, 8, 8, -8, 8)
 4:4/0 = 0
 4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:4/0 = 0
@@ -671,7 +673,7 @@ sources/1 = SubResource("TileSetAtlasSource_u2osm")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_gbd1u")
-metadata/_edit_vertical_guides_ = [193.0]
+metadata/_edit_vertical_guides_ = [1152.0, 576.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 39.0
@@ -702,6 +704,7 @@ texture_scale = 0.6
 position = Vector2(94, -24)
 
 [node name="Trees" type="Node2D" parent="Objects"]
+y_sort_enabled = true
 position = Vector2(0, 102)
 
 [node name="Tree" parent="Objects/Trees" instance=ExtResource("10_w3ev1")]
@@ -720,10 +723,14 @@ gradient = ExtResource("5_61rjf")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 scale = Vector2(3, 3)
 transform = Transform2D(3, 0, 0, 3, 0, 0)
+script = ExtResource("10_tjxv7")
 
 [node name="Inventory" parent="CanvasLayer" instance=ExtResource("5_5myng")]
 visible = false
 position = Vector2(127.333, 63)
+
+[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("11_xdj4n")]
+position = Vector2(90, 186.333)
 
 [node name="DayNightCycleUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
