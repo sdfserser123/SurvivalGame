@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cwwse3hy7he11"]
+[gd_scene load_steps=30 format=3 uid="uid://cwwse3hy7he11"]
 
 [ext_resource type="Script" uid="uid://jkqnedqaops8" path="res://Scripts/Player/player.gd" id="1_xpcdj"]
 [ext_resource type="Texture2D" uid="uid://cosxbqaw2md2e" path="res://Texture/Characters/Body_A/Animations/Idle_Base/Idle_Down-Sheet.png" id="2_mtuoh"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://qwq4ywh4adqf" path="res://Texture/Characters/Body_A/Animations/Slice_Base/Slice_Down-Sheet.png" id="8_jlvik"]
 [ext_resource type="Texture2D" uid="uid://c80bibtjog8iq" path="res://Texture/Characters/Body_A/Animations/Slice_Base/Slice_Side-Sheet.png" id="9_gk6dx"]
 [ext_resource type="Texture2D" uid="uid://dfqgsuat7l1h4" path="res://Texture/Characters/Body_A/Animations/Slice_Base/Slice_Up-Sheet.png" id="10_jhyir"]
+[ext_resource type="Texture2D" uid="uid://d02e6v2q6ifqh" path="res://Texture/Characters/Body_A/Animations/Hit_Base/Hit_Down-Sheet.png" id="11_74mp2"]
+[ext_resource type="Script" uid="uid://ddyss8xqgj11v" path="res://Scripts/Player/hitbox.gd" id="12_oikmp"]
+[ext_resource type="Script" uid="uid://dx21kulr5vyu" path="res://Scripts/Player/attack_collision.gd" id="13_06tpx"]
 
 [sub_resource type="Animation" id="Animation_jlvik"]
 length = 0.001
@@ -590,6 +593,21 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_ks1b7"]
+resource_name = "punching_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerTexture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_74mp2")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_74mp2"]
 _data = {
 &"RESET": SubResource("Animation_jlvik"),
@@ -599,6 +617,7 @@ _data = {
 &"idle_down": SubResource("Animation_0u5uq"),
 &"idle_side": SubResource("Animation_jhyir"),
 &"idle_up": SubResource("Animation_gk6dx"),
+&"punching_down": SubResource("Animation_ks1b7"),
 &"run_down": SubResource("Animation_oikmp"),
 &"run_side": SubResource("Animation_06tpx"),
 &"run_up": SubResource("Animation_74mp2")
@@ -634,11 +653,13 @@ position = Vector2(0, 9)
 shape = SubResource("CapsuleShape2D_uvnfx")
 
 [node name="hitbox" type="Area2D" parent="." groups=["Attack"]]
+script = ExtResource("12_oikmp")
 
 [node name="AttackCollision" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_0u5uq")
 disabled = true
+script = ExtResource("13_06tpx")
 
 [node name="AttackCD" type="Timer" parent="hitbox/AttackCollision"]
 one_shot = true

@@ -18,7 +18,7 @@ func _ready() -> void:
 	
 func pickFromSlot():
 	remove_child(item)
-	var inventoryNode = find_parent("Inventory")
+	var inventoryNode = find_parent("UserInterface")
 	inventoryNode.add_child(item)
 	item.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	call_deferred("update_item_position", item)
@@ -27,7 +27,7 @@ func pickFromSlot():
 func putInSlot(new_item):
 	item = new_item
 	item.position = Vector2.ZERO
-	var inventoryNode = find_parent("Inventory")
+	var inventoryNode = find_parent("UserInterface")
 	if item.get_parent() == inventoryNode:
 		inventoryNode.remove_child(item)
 	add_child(item)

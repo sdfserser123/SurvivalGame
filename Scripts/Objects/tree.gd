@@ -11,7 +11,7 @@ var tree_drop = preload("res://Scenes/Drops/drop.tscn")
 
 var playerpos = Vector2.ZERO
 
-var hp = 3
+var hp = 10
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print(tree_drop)
@@ -57,10 +57,22 @@ func _on_tree_animation_animation_finished(anim_name: StringName) -> void:
 
 	self.visible = false
 	queue_free()
+
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Attack"):
-		if hp > 0:
-			hp -= 1
-			hit_flash.play("hit_flash")
-		elif hp <= 0:
-			death()
+		var weapon_id = ""
+		var damage = 0
+		if area.has_method("get_weapon_id") and area.has_method("get_weapon_damage"):
+			weapon_id = area.get_weapon_id()
+			damage = area.get_weapon_damage()
+			print(weapon_id)
+
+		# Kiểm tra có phải rìu không
+		if ItemDb.ITEMS.has(weapon_id):
+			print("it has")
+			var item_data = ItemDb.ITEMS[weapon_id]
+			if item_data.get("catagory", "") == "axe":
+				hp -= damage
+				hit_flash.play("hit_flash")
+				if hp <= 0:
+					death()

@@ -720,19 +720,19 @@ color = Color(0.164505, 0.264607, 0.365208, 1)
 script = ExtResource("4_734yo")
 gradient = ExtResource("5_61rjf")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UserInterface" type="CanvasLayer" parent="."]
 scale = Vector2(3, 3)
 transform = Transform2D(3, 0, 0, 3, 0, 0)
 script = ExtResource("10_tjxv7")
 
-[node name="Inventory" parent="CanvasLayer" instance=ExtResource("5_5myng")]
+[node name="Inventory" parent="UserInterface" instance=ExtResource("5_5myng")]
 visible = false
 position = Vector2(127.333, 63)
 
-[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("11_xdj4n")]
+[node name="Hotbar" parent="UserInterface" instance=ExtResource("11_xdj4n")]
 position = Vector2(90, 186.333)
 
-[node name="DayNightCycleUI" type="Control" parent="CanvasLayer"]
+[node name="DayNightCycleUI" type="Control" parent="UserInterface"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b30h0uqxg5kds" path="res://Texture/Icons/Tools/wooden_pickaxe.png" id="2_lxahe"]
 
 [node name="Item" type="Control"]
+z_index = 10
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2

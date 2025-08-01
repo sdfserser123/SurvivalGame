@@ -1,6 +1,9 @@
 extends CanvasLayer
 
 @onready var inventory: Node2D = $Inventory
+@onready var hotbar: Node2D = $Hotbar
+
+var holding_item = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,9 +13,11 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("inventory"):
 		if inventory.just_closed:
 			inventory.just_closed = false  # reset flag
+			hotbar.disable_mouse()
 			return
 		inventory.is_open = true
 		inventory.initialize_inventory()
+		hotbar.enable_mouse()
 		inventory.visible = true
 		get_tree().paused = true
 	if event.is_action_pressed("scroll_up"):
