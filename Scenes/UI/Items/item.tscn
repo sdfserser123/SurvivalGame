@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbeetlgnldh5e"]
+
+[ext_resource type="Script" uid="uid://diyup1dk58whk" path="res://Scripts/Items/item.gd" id="1_jl4sg"]
+[ext_resource type="Texture2D" uid="uid://b30h0uqxg5kds" path="res://Texture/Icons/Tools/wooden_pickaxe.png" id="2_lxahe"]
+
+[node name="Item" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_jl4sg")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 2
+
+[node name="ItemTexture" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_lxahe")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemQuantity" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 31.0
+offset_bottom = 36.0
+scale = Vector2(0.2, 0.2)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 9
+theme_override_font_sizes/font_size = 19
+text = "16"
+horizontal_alignment = 2

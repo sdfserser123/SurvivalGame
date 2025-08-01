@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6gsgtlvfetmh"]
+
+[ext_resource type="Script" uid="uid://dxkfem38rk2h7" path="res://Scripts/Drops/drop.gd" id="1_qyrgv"]
+[ext_resource type="Texture2D" uid="uid://c1b52ms7yiycp" path="res://Texture/Icons/Materials/log.png" id="1_w8hce"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qyrgv"]
+
+[sub_resource type="Animation" id="Animation_w8hce"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DropTexture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_np4ux"]
+resource_name = "dropping"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DropTexture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(0.31864, 1.56917, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(0.381, 1.56, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjgap"]
+_data = {
+&"RESET": SubResource("Animation_w8hce"),
+&"dropping": SubResource("Animation_np4ux")
+}
+
+[node name="Drop" type="Area2D" groups=["Drops"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_qyrgv")
+
+[node name="DropTexture" type="Sprite2D" parent="."]
+texture = ExtResource("1_w8hce")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qyrgv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bjgap")
+}
+autoplay = "dropping"
