@@ -52,4 +52,12 @@ const ITEMS = {
 		"chopping_speed" : 1,
 		"stack_size" : 1,
 	},
+	"wooden_workbench": {
+		"type" : "placeable",
+		"catagory" : "station",
+		"icon_name" : "wooden_workbench",
+		"display_name" : "WorkBench",
+		"stack_size" : 1,
+		
+	}
 }

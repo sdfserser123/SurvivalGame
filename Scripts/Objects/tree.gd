@@ -13,9 +13,7 @@ var playerpos = Vector2.ZERO
 
 var hp = 10
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	print(tree_drop)
-	print("Loot base:", loot_base)  # Nếu null -> group "Drops" chưa được gán đúng
+func _ready() -> void: 
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,11 +63,10 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		if area.has_method("get_weapon_id") and area.has_method("get_weapon_damage"):
 			weapon_id = area.get_weapon_id()
 			damage = area.get_weapon_damage()
-			print(weapon_id)
+			print(damage)
 
 		# Kiểm tra có phải rìu không
 		if ItemDb.ITEMS.has(weapon_id):
-			print("it has")
 			var item_data = ItemDb.ITEMS[weapon_id]
 			if item_data.get("catagory", "") == "axe":
 				hp -= damage

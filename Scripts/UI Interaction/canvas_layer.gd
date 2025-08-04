@@ -18,6 +18,7 @@ func _input(event: InputEvent) -> void:
 		inventory.is_open = true
 		inventory.initialize_inventory()
 		hotbar.enable_mouse()
+		hotbar.initialize_hotbar()
 		inventory.visible = true
 		get_tree().paused = true
 	if event.is_action_pressed("scroll_up"):

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt0vur775t7po"]
+
+[ext_resource type="Script" uid="uid://b5enx8d51lobk" path="res://Scripts/Objects/placeable_footprint.gd" id="1_hvu2v"]
+
+[node name="PlaceableFootprint" type="Area2D"]
+collision_layer = 256
+collision_mask = 288
+script = ExtResource("1_hvu2v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

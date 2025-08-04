@@ -5,37 +5,56 @@ const slotClass = preload("res://Scripts/Inventory/inventory_slot.gd")
 @onready var slots = hotbar_container.get_children()
 @onready var selected_animation: AnimatedSprite2D = $SelectedAnimation
 @onready var mouse_block: ColorRect = $MouseBlock
+@onready var player = get_tree().get_first_node_in_group("Player")
+var is_open = false
 
 func _unhandled_input(event):
-	if event.is_action_pressed("scroll_up"):
+	var slot_changed = false
+	
+	if event.is_action_pressed("scroll_down"):
 		PlayerInventory.active_item_scroll_up()
-	elif event.is_action_pressed("scroll_down"):
+		slot_changed = true
+	elif event.is_action_pressed("scroll_up"):
 		PlayerInventory.active_item_scroll_down()
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_1"):
 		PlayerInventory.set_active_slot(0)
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_2"):
 		PlayerInventory.set_active_slot(1)
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_3"):
 		PlayerInventory.set_active_slot(2)
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_4"):
 		PlayerInventory.set_active_slot(3)
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_5"):
 		PlayerInventory.set_active_slot(4)
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_6"):
 		PlayerInventory.set_active_slot(5)
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_7"):
 		PlayerInventory.set_active_slot(6)
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_8"):
 		PlayerInventory.set_active_slot(7)
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_9"):
 		PlayerInventory.set_active_slot(8)
+		slot_changed = true
 	elif event.is_action_pressed("hotbar_0"):
 		PlayerInventory.set_active_slot(9)
-
+		slot_changed = true
+	if slot_changed:
+		player._check_current_item()
+		initialize_hotbar()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	PlayerInventory.connect("active_item_updated", Callable(self, "move_selector_to_slot"))
+	PlayerInventory.connect("remove_the_item", Callable(self, "remove_selected_slot_item"))
 	for i in range(slots.size()):
 		slots[i].slot_type = slotClass.SlotType.HOTBAR
 		slots[i].slot_index = i
@@ -43,6 +62,20 @@ func _ready() -> void:
 		# ✅ Phải có dòng này để nhận sự kiện click chuột!
 		slots[i].gui_input.connect(slot_gui_input.bind(slots[i]))
 	move_selector_to_slot(PlayerInventory.active_item_slot)
+	initialize_hotbar()
+
+func remove_selected_slot_item(slot_index):
+	if slot_index < 0 or slot_index >= slots.size():
+		return
+	var slot_node = slots[slot_index]
+	
+	# Xóa dữ liệu trong PlayerInventory
+	PlayerInventory.remove_item(slot_node)
+	
+	# Xóa luôn item node trong UI
+	if slot_node.item:
+		slot_node.remove_item() # hàm này thường dùng để remove item Node khỏi slot
+	
 	initialize_hotbar()
 
 func move_selector_to_slot(slot_index: int):

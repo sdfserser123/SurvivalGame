@@ -1,6 +1,7 @@
 extends Node
 
 signal active_item_updated(slot_index)
+signal remove_the_item(slot_index)
 
 const slotClass = preload("res://Scripts/Inventory/inventory_slot.gd")
 const ItemClass = preload("res://Scripts/Items/item.gd")
@@ -16,7 +17,9 @@ var inventory = {
 }
 
 var hotbar = {
-	1: ["wooden_axe", 1]
+	
+	1: ["wooden_axe", 1],
+	5: ["wooden_workbench", 1]
 }
 
 var active_item_slot = 0
@@ -73,3 +76,18 @@ func set_active_slot(index: int):
 		active_item_slot = index
 		player.update_current_item()
 		emit_signal("active_item_updated", active_item_slot)
+
+func decrease_item(num: int):
+	var slot_index = active_item_slot
+	if not hotbar.has(slot_index):
+		return # Slot trống, không làm gì
+
+	# Giảm số lượng
+	hotbar[slot_index][1] -= num
+
+	# Nếu <= 0 thì xóa slot
+	if hotbar[slot_index][1] <= 0:
+		emit_signal("remove_the_item", active_item_slot)
+		hotbar.erase(slot_index)
+	
+	

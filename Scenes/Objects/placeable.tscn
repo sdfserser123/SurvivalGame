@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ya8gmmluu4tg"]
+
+[ext_resource type="PackedScene" uid="uid://bt0vur775t7po" path="res://Scenes/Objects/placeable_footprint.tscn" id="1_0e6j8"]
+[ext_resource type="Script" uid="uid://cq7twsv6xurfm" path="res://Scripts/Objects/placeable.gd" id="1_uw35j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e6j8"]
+
+[node name="Placeable" type="StaticBody2D"]
+script = ExtResource("1_uw35j")
+
+[node name="PlaceableFootprint" parent="." instance=ExtResource("1_0e6j8")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0e6j8")

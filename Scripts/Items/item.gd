@@ -14,7 +14,7 @@ var item_amount
 const TOOLS_PATH = "res://Texture/Icons/Tools/"
 const FOOD_PATH = "res://Texture/Icons/Food/"
 const MATERIAL_PATH = "res://Texture/Icons/Materials/"
-
+const PLACEABLE_PATH =  "res://Texture/Environment/Structures/"
 
 var item_data = {} 
 # Called when the node enters the scene tree for the first time.
@@ -59,7 +59,12 @@ func load_item(id: String):
 		texture_path = FOOD_PATH
 	elif item_data.type == "tools":
 		texture_path = TOOLS_PATH
-	print(texture_path + icon_name + ".png")
+	elif item_data.type == "placeable":
+		var dir_name = item_data.get("display_name", "")
+		if item_data.catagory == "station":
+			texture_path = PLACEABLE_PATH + "Stations/" + dir_name + "/"
+		else:
+			texture_path = PLACEABLE_PATH + "Buildings/" + dir_name + "/"
 	item_texture.texture = load(texture_path + icon_name + ".png")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

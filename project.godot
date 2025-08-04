@@ -25,6 +25,9 @@ PlayerInventory="*res://Data/player_inventory.tscn"
 Attack=""
 Player=""
 Drops=""
+Objects=""
+UI=""
+Buildings=""
 
 [input]
 

@@ -24,6 +24,10 @@ func pickFromSlot():
 	call_deferred("update_item_position", item)
 	item = null
 
+func remove_item():
+	remove_child(item)
+	item = null
+
 func putInSlot(new_item):
 	item = new_item
 	item.position = Vector2.ZERO
@@ -37,8 +41,6 @@ func update_item_position(item):
 	item.global_position = get_global_mouse_position()
 
 func initialize_item(idName, item_amount):
-	print(idName)
-	print(item_amount)
 	if item == null:
 		item = ItemClass.instantiate()
 		add_child(item)

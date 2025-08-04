@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var player_texture: Sprite2D = $PlayerTexture
 @onready var player_animation: AnimationPlayer = $PlayerAnimation
+@onready var item_placer: Node2D = $ItemPlacer
 
 var is_movable = true
 var got_hit = false
@@ -10,7 +11,7 @@ var last_movement = Vector2.UP
 var can_attack = true
 var direction = Vector2.DOWN
 var current_item_id: String = ""
-var current_attack_damage: int = 0
+var current_attack_damage = 0
 
 @onready var hitbox: Area2D = $hitbox
 @onready var attack_collision: CollisionShape2D = $hitbox/AttackCollision
@@ -33,6 +34,10 @@ func _physics_process(delta: float) -> void:
 		do_attack()
 
 	movement()
+
+func _process(delta: float) -> void:
+	pass
+	
 
 func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -93,8 +98,7 @@ func update_hitbox_direction():
 	hitbox.position = offset
 
 func do_attack():
-	if is_holding_axe():
-		
+	if _on_item_bar_item_selected() == "axe":
 		var item_id = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		print(item_id)
 		var item_info = ItemDb.ITEMS.get(item_id, {})
@@ -112,13 +116,21 @@ func do_attack():
 	else:
 		return
 
-func is_holding_axe() -> bool:
+func _check_current_item():
+	if _on_item_bar_item_selected() == "placeable":
+		item_placer.get_current_item()
+	else:
+		item_placer.clear_instance()
+
+func _on_item_bar_item_selected():
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		var item_data = PlayerInventory.hotbar[PlayerInventory.active_item_slot]
 		var id_name = item_data[0]
-		if ItemDb.ITEMS.has(id_name) and ItemDb.ITEMS[id_name].catagory == "axe":
-			return true
-	return false
+		if ItemDb.ITEMS.has(id_name) and ItemDb.ITEMS[id_name].type == "tools":
+			if ItemDb.ITEMS[id_name].catagory == "axe":
+				return "axe"
+		elif ItemDb.ITEMS.has(id_name) and ItemDb.ITEMS[id_name].type == "placeable":
+			return "placeable"
 
 func update_current_item():
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
@@ -129,6 +141,19 @@ func update_current_item():
 	else:
 		current_item_id = ""
 		current_attack_damage = 0
+
+func remove_selected_item(item, num):
+	if !PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		return
+	var item_data = PlayerInventory.hotbar[PlayerInventory.active_item_slot]
+	if item_data == null:
+		return
+	if item_data.size() == 0:
+		return
+	
+	var current_item_id = item_data[0]
+	if current_item_id == item:
+		PlayerInventory.decrease_item(num)
 
 func _on_attack_cd_timeout() -> void:
 	attack_collision.disabled = true
@@ -143,6 +168,8 @@ func _on_grab_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Drops"):
 		area.target = self
 
+func _handle_item_selection(item):
+	pass
 
 func _on_collect_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Drops"):
