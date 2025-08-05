@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 ItemDb="*res://Data/item_db.tscn"
 PlayerInventory="*res://Data/player_inventory.tscn"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdscript2all/plugin.cfg")
+
 [global_group]
 
 Attack=""
