@@ -15,7 +15,7 @@ region = Rect2(48, 64, 16, 16)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dt15g"]
 texture = SubResource("AtlasTexture_s6m5x")
 
-[node name="Inventory" type="Node2D"]
+[node name="Inventory" type="Node2D" groups=["UI"]]
 process_mode = 3
 z_index = 10
 script = ExtResource("1_l76og")

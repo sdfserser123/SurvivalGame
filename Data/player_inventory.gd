@@ -2,6 +2,7 @@ extends Node
 
 signal active_item_updated(slot_index)
 signal remove_the_item(slot_index)
+signal inventory_updated
 
 const slotClass = preload("res://Scripts/Inventory/inventory_slot.gd")
 const ItemClass = preload("res://Scripts/Items/item.gd")
@@ -13,7 +14,9 @@ const NUM_HOTBAR_SLOTS = 10
 
 var inventory = {
 	0: ["wooden_axe", 1],
-	15: ["wood_log", 15]
+	15: ["wood_log", 15],
+	16: ["wood_log", 12],
+	20: ["stone", 14]
 }
 
 var hotbar = {
@@ -89,5 +92,39 @@ func decrease_item(num: int):
 	if hotbar[slot_index][1] <= 0:
 		emit_signal("remove_the_item", active_item_slot)
 		hotbar.erase(slot_index)
+
+func get_total_item_counts():
+	var counts := {}
+	for slot in inventory.values():
+		var item_id = slot[0]
+		var amount = slot[1]
+		if item_id == null:
+			continue
+		if item_id in counts:
+			counts[item_id] += amount
+		else:
+			counts[item_id] = amount
+	print(counts)
+	return counts  
 	
+func remove_item_by_id(item_id: String, amount: int):
+	# Duyệt qua inventory
+	var slots_to_remove := []
+	for slot_index in inventory.keys():
+		if inventory[slot_index][0] == item_id:
+			var current_amount = inventory[slot_index][1]
+			if current_amount > amount:
+				inventory[slot_index][1] -= amount
+				return
+			else:
+				amount -= current_amount
+				slots_to_remove.append(slot_index)
+				if amount <= 0:
+					emit_signal("remove_the_item", slot_index)
+					break
 	
+	# Xóa slot nào đã hết
+	for slot_index in slots_to_remove:
+		inventory.erase(slot_index)
+	print("xong")
+	emit_signal("inventory_updated")

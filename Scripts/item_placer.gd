@@ -30,6 +30,7 @@ func _create_placement_preview():
 		return
 	
 	preview_instance = preview_scene.instantiate()
+	preview_instance.is_placed = false
 	preview_instance.modulate = Color(1, 1, 1, 0.5) # làm mờ preview
 	for child in preview_instance.get_children():
 		if child is CollisionShape2D:
@@ -65,11 +66,11 @@ func place_item():
 	var scene = load(path)
 	var placed_instance = scene.instantiate()
 	placed_instance.global_position = preview_instance.global_position
-	
 	# Thêm vào node quản lý object trong thế giới
 	var objects_node = get_tree().current_scene.get_node("Objects")
 	objects_node.add_child(placed_instance)
 	var placeable_instance = placed_instance.get_node("Placeable")
+	
 	placeable_instance.queue_free()
 	# Xóa item khỏi hotbar
 	player.remove_selected_item(item_to_place, 1)

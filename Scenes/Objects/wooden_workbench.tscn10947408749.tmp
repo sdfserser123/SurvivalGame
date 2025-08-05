@@ -97,11 +97,10 @@ shape = SubResource("RectangleShape2D_g0q8y")
 
 [node name="CraftingArea" type="Area2D" parent="."]
 
-[node name="CraftingAreaCollision" type="CollisionShape2D" parent="CraftingArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingArea"]
 shape = SubResource("CircleShape2D_ru5u3")
 
 [connection signal="body_entered" from="Placeable" to="Placeable" method="_on_body_entered"]
 [connection signal="body_exited" from="Placeable" to="Placeable" method="_on_body_exited"]
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="CraftingArea" to="." method="_on_crafting_area_body_entered"]
-[connection signal="body_exited" from="CraftingArea" to="." method="_on_crafting_area_body_exited"]

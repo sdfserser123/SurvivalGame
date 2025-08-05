@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ItemDb="*res://Data/item_db.tscn"
 PlayerInventory="*res://Data/player_inventory.tscn"
+RecipeDb="*res://Data/recipe_db.tscn"
 
 [editor_plugins]
 

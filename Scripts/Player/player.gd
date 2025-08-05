@@ -12,6 +12,7 @@ var can_attack = true
 var direction = Vector2.DOWN
 var current_item_id: String = ""
 var current_attack_damage = 0
+var standing_near = [""]
 
 @onready var hitbox: Area2D = $hitbox
 @onready var attack_collision: CollisionShape2D = $hitbox/AttackCollision
@@ -28,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
-
+	
 	# Gọi attack nếu đang giữ phím và có thể tấn công
 	if Input.is_action_pressed("attack") and can_attack:
 		do_attack()
@@ -154,6 +155,9 @@ func remove_selected_item(item, num):
 	var current_item_id = item_data[0]
 	if current_item_id == item:
 		PlayerInventory.decrease_item(num)
+
+func get_what_are_near():
+	return standing_near
 
 func _on_attack_cd_timeout() -> void:
 	attack_collision.disabled = true

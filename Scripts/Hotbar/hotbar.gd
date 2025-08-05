@@ -11,10 +11,10 @@ var is_open = false
 func _unhandled_input(event):
 	var slot_changed = false
 	
-	if event.is_action_pressed("scroll_down"):
+	if event.is_action_pressed("scroll_down") && !is_open:
 		PlayerInventory.active_item_scroll_up()
 		slot_changed = true
-	elif event.is_action_pressed("scroll_up"):
+	elif event.is_action_pressed("scroll_up") && !is_open:
 		PlayerInventory.active_item_scroll_down()
 		slot_changed = true
 	elif event.is_action_pressed("hotbar_1"):

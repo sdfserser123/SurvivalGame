@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmm6s2ahvnuag"]
+
+[ext_resource type="Script" uid="uid://dk4040xfi20rh" path="res://Scripts/Inventory/crafting_bar.gd" id="1_bd2g8"]
+[ext_resource type="Texture2D" uid="uid://dhsmj6redxnr7" path="res://Texture/UI/Hammer.png" id="2_bcpmp"]
+
+[node name="CraftingBar" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 22.0
+offset_bottom = 21.0
+script = ExtResource("1_bd2g8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 12)
+scale = Vector2(0.0687501, 0.0687501)
+texture = ExtResource("2_bcpmp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 2.0
+offset_right = 392.0
+offset_bottom = 20.0
+mouse_filter = 2
+color = Color(0.152941, 0.152941, 0.152941, 0.584314)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 3.0
+offset_right = 391.0
+offset_bottom = 19.0
+mouse_filter = 2
+vertical_scroll_mode = 0
+
+[node name="ItemContainer" type="HBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+mouse_filter = 2

@@ -5,8 +5,10 @@ extends StaticBody2D
 @onready var collision_shape_2d: CollisionShape2D = $hurt_box/CollisionShape2D
 @onready var loot_base = get_tree().get_first_node_in_group("Drops")
 @onready var hit_flash: AnimationPlayer = $hit_flash
+@onready var crafting_area_collision: CollisionShape2D = $CraftingArea/CraftingAreaCollision
 
 var hp = 5
+var is_placed = true
 
 var drop = preload("res://Scenes/Drops/drop.tscn")
 
@@ -16,6 +18,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if !is_placed:
+		crafting_area_collision.disabled = true
+
+func _physics_process(delta: float) -> void:
 	if hp <= 0:
 		death()
 
@@ -58,3 +64,13 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					hit_flash.play("hit_flash")
 					if hp <= 0:
 						death()
+
+
+func _on_crafting_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		body.standing_near.append("wooden_workbench")
+
+
+func _on_crafting_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		body.standing_near.erase("wooden_workbench")

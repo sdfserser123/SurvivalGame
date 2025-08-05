@@ -18,6 +18,8 @@ func _ready() -> void:
 		slots[i].slot_index = i
 		slots[i].slot_type = slotClass.SlotType.INVENTORY
 	initialize_inventory()
+	PlayerInventory.connect("inventory_updated", Callable(self, "initialize_inventory"))
+	PlayerInventory.connect("remove_the_item", Callable(self, "remove_selected_slot_item"))
 
 func slot_gui_input(event: InputEvent, slot: slotClass):
 	if event is InputEventMouseButton:
@@ -32,6 +34,21 @@ func slot_gui_input(event: InputEvent, slot: slotClass):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding_item(slot)
+
+func remove_selected_slot_item(slot_index):
+	var slots = inventory_slots.get_children()
+	if slot_index < 0 or slot_index >= slots.size():
+		return
+	var slot_node = slots[slot_index]
+	
+	# Xóa dữ liệu trong PlayerInventory
+	PlayerInventory.remove_item(slot_node)
+	
+	# Xóa luôn item node trong UI
+	if slot_node.item:
+		slot_node.remove_item() # hàm này thường dùng để remove item Node khỏi slot
+	
+	initialize_inventory()
 
 func initialize_inventory():
 	var slots = inventory_slots.get_children()

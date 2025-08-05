@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var inventory: Node2D = $Inventory
 @onready var hotbar: Node2D = $Hotbar
+@onready var crafting_bar: Control = $CraftingBar
 
 var holding_item = null
 
@@ -13,9 +14,14 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("inventory"):
 		if inventory.just_closed:
 			inventory.just_closed = false  # reset flag
+			hotbar.is_open = false
 			hotbar.disable_mouse()
 			return
 		inventory.is_open = true
+		crafting_bar.is_open = true
+		hotbar.is_open = true
+		crafting_bar.visible = inventory.is_open
+		crafting_bar.initialize_crafting()
 		inventory.initialize_inventory()
 		hotbar.enable_mouse()
 		hotbar.initialize_hotbar()
